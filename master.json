@@ -15,7 +15,11 @@
 	      "--root_ca_file=/srv/kubernetes/ca.crt",
               "--master=127.0.0.1:8080",
               "--v=2"
-        ]
+        ],
+      "volumes": [
+              "/srv:/srv"
+      ]
+ 
     },
     {
       "name": "apiserver",
@@ -32,7 +36,10 @@
               "--cluster-name=kubernetes",
 	      "--admission_control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota",
               "--v=2"
-        ]
+        ],
+      "volumes": [
+              "/srv:/srv"
+      ]
     },
     {
       "name": "scheduler",
@@ -42,6 +49,9 @@
               "scheduler",
               "--master=127.0.0.1:8080",
               "--v=2"
+        ],
+      "volumes": [
+              "/srv:/srv"
         ]
     }
   ]
