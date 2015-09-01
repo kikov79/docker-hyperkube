@@ -11,6 +11,8 @@
       "command": [
               "/hyperkube",
               "controller-manager",
+	      "--service_account_private_key_file=/srv/kubernetes/server.key",
+	      "--root_ca_file=/srv/kubernetes/ca.crt",
               "--master=127.0.0.1:8080",
               "--v=2"
         ]
@@ -21,6 +23,9 @@
       "command": [
               "/hyperkube",
               "apiserver",
+	      "--client-ca-file=/srv/kubernetes/ca.crt",
+	      "--tls-cert-file=/srv/kubernetes/server.cert",
+	      "--tls-private-key-file=/srv/kubernetes/server.key",
               "--portal-net=10.0.0.1/24",
               "--address=0.0.0.0",
               "--etcd-servers=http://127.0.0.1:4001",
