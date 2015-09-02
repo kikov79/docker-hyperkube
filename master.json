@@ -16,9 +16,10 @@
               "--master=127.0.0.1:8080",
               "--v=2"
         ],
-      "volumes": [
-              "/srv:/srv"
-      ]
+      "volumeMounts": [{
+              "name": "srv",
+	      "mountPath": "/srv"
+      }]
  
     },
     {
@@ -37,9 +38,10 @@
 	      "--admission_control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota",
               "--v=2"
         ],
-      "volumes": [
-              "/srv:/srv"
-      ]
+      "volumeMounts": [{
+              "name": "srv",
+	      "mountPath": "/srv"
+      }]
     },
     {
       "name": "scheduler",
@@ -50,10 +52,18 @@
               "--master=127.0.0.1:8080",
               "--v=2"
         ],
-      "volumes": [
-              "/srv:/srv"
-        ]
+      "volumeMounts": [{
+              "name": "srv",
+	      "mountPath": "/srv"
+      }]
     }
-  ]
+  ],
+  "volumes": [{
+	"name": "srv",
+        "hostPath": {
+             "path": "/srv"
+        }
+  }]
  }
 }
+
