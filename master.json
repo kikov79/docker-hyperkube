@@ -36,7 +36,7 @@
               "--address=0.0.0.0",
               "--etcd-servers=http://127.0.0.1:4001",
               "--cluster-name=kubernetes",
-	      "--admission_control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota",
+	      "--admission_control=NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota",
               "--v=2"
         ],
       "volumeMounts": [{
