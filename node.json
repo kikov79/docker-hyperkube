@@ -1,0 +1,48 @@
+{
+"apiVersion": "v1",
+"kind": "Pod",
+"metadata": {"name":"k8s-worker"},
+"spec":{
+  "hostNetwork": true,
+  "containers":[
+    {
+      "name": "controller-manager",
+      "image": "gcr.io/google_containers/hyperkube:v1.1.7",
+      "command": [
+              "/hyperkube",
+              "controller-manager",
+	      "--service_account_private_key_file=/srv/kubernetes/server.key",
+	      "--root_ca_file=/srv/kubernetes/ca.crt",
+              "--master=%MASTER%:8080",
+              "--v=2"
+        ],
+      "volumeMounts": [{
+              "name": "srv",
+	      "mountPath": "/srv"
+      }]
+ 
+    },
+    {
+      "name": "scheduler",
+      "image": "gcr.io/google_containers/hyperkube:v1.1.7",
+      "command": [
+              "/hyperkube",
+              "scheduler",
+              "--master=%MASTER%:8080",
+              "--v=2"
+        ],
+      "volumeMounts": [{
+              "name": "srv",
+	      "mountPath": "/srv"
+      }]
+    }
+  ],
+  "volumes": [{
+	"name": "srv",
+        "hostPath": {
+             "path": "/srv"
+        }
+  }]
+ }
+}
+
